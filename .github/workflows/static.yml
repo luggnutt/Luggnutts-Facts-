@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Fun Fact Selector</title>
+  <style>
+    /* Include the custom font using @font-face */
+    @font-face {
+      font-family: 'Harmond';
+      src: url('X:/Website/Harmond-Free-For-Personal-Use/Harmond - Free For Personal Use/Harmond-SemiBoldCondensed.otf') format('opentype');
+    }
+
+    body {
+      background-color: #ffd738;
+      font-family: 'Harmond', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 3em;
+      text-decoration: underline;
+      font-style: italic;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    #fact {
+      font-size: 3em;
+      margin-bottom: 20px; /* Ensure enough space for the button */
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    button {
+      padding: 15px 40px;
+      font-size: 2em;
+      cursor: pointer;
+      font-family: 'Harmond', Arial, sans-serif;
+      transition: transform 0.2s ease-in-out;
+      margin-top: 20px;
+    }
+    button:hover {
+      transform: scale(1.1); /* Button grows slightly when hovered */
+    }
+
+  </style>
+</head>
+<body>
+  <h1><i><b>Random Fun Fact!</b></i></h1>
+  <div id="fact">Click the button to get a fun fact!</div>
+  <button onclick="displayRandomFact()">Get a Fun Fact</button>
+
+  <script>
+    // Array of fun facts
+    const funFacts = [
+      "Octopuses have three hearts and their blood is blue!", 
+"Butterflies can taste with their feet!", 
+"There are more stars in the universe than grains of sand on Earth!", 
+"Sloths can hold their breath longer than dolphins – up to 40 minutes!", 
+"A single strand of spider silk is five times stronger than a piece of steel of the same diameter!", 
+"Water can boil and freeze at the same time – this is called the 'triple point'.", 
+"Lightning strikes the Earth about 8 million times a day!", 
+"The Amazon rainforest produces 20% of the world’s oxygen supply!", 
+"Mount Everest grows about 4 millimeters taller every year due to tectonic plate movements!", 
+"Giraffes only need 5 to 30 minutes of sleep a day!", 
+"There is enough DNA in the human body to stretch from the Sun to Pluto and back 17 times!", 
+"Fireflies produce light using a chemical reaction called bioluminescence.", 
+"Sharks have been around longer than trees – over 400 million years!", 
+"Turtles can breathe through their butts – a process called cloacal respiration!", 
+"A day on Venus is longer than a year on Venus.", 
+"Snow isn’t actually white; it’s translucent. The light reflects to make it look white.", 
+"Bananas are radioactive because they contain potassium-40, a radioactive isotope.", 
+"This Website is completely virus free! Just facts here", 
+"The human brain generates enough electricity to power a small LED lightbulb.", 
+"The deep-sea anglerfish uses a bioluminescent lure on its head to attract prey.", 
+"The poison dart frog’s skin is so toxic it can kill up to 20,000 mice.", 
+"Owls are unable to move their eyeballs – their eyes are fixed in their sockets.", 
+"Sharks do not have bones – their skeletons are made of cartilage.", 
+"Saturn's moon Titan has a weather cycle similar to Earth but with liquid methane instead of water.", 
+"Penguins can jump as high as six feet in the air!", 
+"The Mantis Shrimp has the fastest punch in the animal kingdom.", 
+"A group of porcupines is called a prickle.", 
+"Starfish can regenerate lost arms, and in some species, a whole new starfish can regenerate from one arm!", 
+"The human nose can detect more than one trillion different scents.", 
+"Blood makes up about 8% of a person’s body weight.", 
+"The cockroach is the only creature that can survive decapitation for up to a week, as it breathes through its body.", 
+"More energy from the Sun hits Earth in one hour than the planet uses in a whole year.", 
+"Lake Baikal in Siberia is the deepest and oldest freshwater lake in the world.", 
+"Giant pandas spend around 12 hours a day eating.", 
+"Goldfish can recognize their owners and respond to them.", 
+"Some bamboo plants can grow up to 35 inches in a single day.", 
+"The Earth's inner core is as hot as the surface of the Sun.", 
+"Cats have a third eyelid called a haw to protect their eyes.", 
+"The shortest war in history lasted only 38 to 45 minutes (Anglo-Zanzibar War).", 
+"Antarctica is the only continent without any native species of ants.", 
+"A lion’s roar can be heard from five miles away.", 
+"Whales have belly buttons because they are mammals and are born through live birth.", 
+"The Milky Way galaxy will collide with the Andromeda galaxy in about 4.5 billion years.", 
+"Octopus arms have their own mini-brains and can act independently of the central brain.", 
+"The deepest part of the ocean, the Mariana Trench, is nearly 7 miles deep.", 
+"An ostrich's eye is larger than its brain.", 
+"Male seahorses are the ones who give birth to their offspring.", 
+"The heart of a blue whale is so large a human could swim through its arteries.", 
+"Humans share about 60% of their DNA with bananas.", 
+"Dogs’ noses are wet to help absorb scent chemicals.", 
+"The Eiffel Tower can grow up to 6 inches taller during the summer due to heat expansion.", 
+"The shortest living animal is the mayfly, which lives for only 24 hours.", 
+"A shrimp’s heart is located in its head.", 
+"Every second, about 100 lightning bolts strike the Earth.", 
+"Bees can see ultraviolet light, which humans cannot.", 
+"The world's smallest reptile is a tiny chameleon discovered in Madagascar.", 
+"The amount of water on Earth now is the same as it was when dinosaurs existed.", 
+"The human stomach replaces its lining every few days to prevent it from digesting itself.", 
+"A human’s ears and nose never stop growing.", 
+"There are more species of beetles on Earth than any other group of animals.", 
+"The largest living organism is a fungus in Oregon, covering over 3.4 square miles.", 
+"Elephants can hear with their feet by detecting vibrations.", 
+"One spoonful of honey represents the lifetime work of 12 bees.", 
+"The Great Wall of China is not visible from space with the naked eye.", 
+"Venus is the hottest planet in the solar system, even though Mercury is closer to the Sun.", 
+"Ravens are capable of solving complex problems and puzzles.", 
+"Flamingos are naturally white; they turn pink due to their diet of brine shrimp and algae.", 
+"A tarantula can live without food for more than two years.", 
+"The giant squid has the largest eyes in the animal kingdom.", 
+"The wingspan of the wandering albatross is the largest of any bird, up to 11 feet.", 
+"Water can dissolve more substances than any other liquid, including sulfuric acid.", 
+"Cows produce more milk when they listen to soothing music.", 
+"Black holes aren’t black; they emit faint radiation called Hawking radiation.", 
+"The Tardigrade, also known as the water bear, can survive in space without food or water.", 
+"Humans shed about 600,000 particles of skin every hour.", 
+"One-third of Earth’s land surface is partially or completely desert.", 
+"The platypus is one of the only mammals that lays eggs.", 
+"Clouds look white because their water droplets scatter sunlight evenly.", 
+"This Website is completely virus free! Just facts here",
+"Sunflowers can remove toxic elements like lead, arsenic, and uranium from the soil.", 
+"Rats and mice laugh when tickled.", 
+"The first oranges weren’t orange; they were green.", 
+"Dragonflies can see in all directions at the same time.", 
+"A bolt of lightning is five times hotter than the surface of the Sun.", 
+"Tree rings not only tell a tree’s age but also indicate environmental conditions during its life.", 
+"Cows have best friends and get stressed when they’re separated.", 
+"Arachnophobia (fear of spiders) is one of the most common fears in the world.", 
+"Hot water freezes faster than cold water – this is known as the Mpemba effect.", 
+"Sea otters hold hands when they sleep to keep from drifting apart.", 
+"Peacocks are male. Females are called peahens.", 
+"Orcas, also called killer whales, are actually part of the dolphin family.", 
+"Earth is the only planet in the solar system not named after a god.", 
+"There are more types of trees in a single acre of rainforest than in the entire continent of Europe.", 
+"Ants can lift objects 50 times their body weight.", 
+"Hummingbirds are the only birds that can fly backwards.", 
+"This Website is completely virus free! Just facts here", 
+"An adult human body is made up of about 37.2 trillion cells!", 
+"Jellyfish have been on Earth for over 500 million years, making them older than dinosaurs!", 
+"Polar bear fur is actually transparent, not white!", 
+"The strongest muscle in the human body, relative to its size, is the jaw muscle (masseter).", 
+"Elephants are the only mammals that can't jump.", 
+"The Sahara Desert can experience snowfall!", 
+"Some species of fungi create their own wind currents to spread spores.", 
+"Dolphins sleep with one eye open to stay alert for predators.", 
+"There are more bacteria in your mouth than there are people on Earth!", 
+"The fingerprints of a koala are so similar to humans that they can confuse crime scene investigations.", 
+"Seahorses are one of the few species where males carry and give birth to babies!", 
+"The Great Barrier Reef is the largest living structure on Earth.", 
+"A group of crows is called a 'murder'.",
+    ];
+
+	function displayRandomFact() {
+      const randomIndex = Math.floor(Math.random() * funFacts.length);
+      const factDiv = document.getElementById("fact");
+      factDiv.textContent = funFacts[randomIndex];
+    }
+  </script>
+</body>
+</html>
